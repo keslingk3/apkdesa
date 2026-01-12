@@ -3,39 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Desa</title>
+    <title>Dashboard Sistem Desa</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Override style body agar tidak tengah tapi scrollable */
-        body { display: block; background: #f4f4f4; padding: 20px; }
-        body::before { display: none; }
-        .nav { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-        .content { margin-top: 20px; background: white; padding: 30px; border-radius: 8px; min-height: 400px; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="nav">
-        <h3 style="color: var(--primary-color);">Admin Desa</h3>
-        <button onclick="logout()" style="padding: 8px 15px; border:none; background: #ff4757; color:white; border-radius: 5px; cursor:pointer;">Keluar</button>
-    </div>
 
-    <div class="content">
-        <h1>Selamat Datang di Dashboard Desa</h1>
-        <p>Halo, <span id="userNameDisplay">Admin</span>. Sistem siap digunakan.</p>
-        <p style="margin-top:20px;">[Di sini Anda bisa menambahkan tabel penduduk, surat menyurat, dll]</p>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h3><i class="fas fa-landmark"></i> SID DESA</h3>
+            
+            <a href="#" class="menu-item active" onclick="showMenu('beranda', this)">
+                <i class="fas fa-home"></i> Beranda
+            </a>
+            <a href="#" class="menu-item" onclick="showMenu('profil', this)">
+                <i class="fas fa-info-circle"></i> Profil Desa
+            </a>
+            <a href="#" class="menu-item" onclick="showMenu('penduduk', this)">
+                <i class="fas fa-users"></i> Data Penduduk
+            </a>
+            <a href="#" class="menu-item" onclick="showMenu('pengaturan', this)">
+                <i class="fas fa-cog"></i> Pengaturan
+            </a>
+            
+            <div style="margin-top: auto;">
+                <a href="#" class="menu-item" style="background: #ff4757;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="header-dashboard">
+                <h2 id="page-title">Beranda</h2>
+                <div class="user-info">
+                    Halo, <b id="userNameDisplay">Admin</b>
+                </div>
+            </div>
+
+            <div id="beranda" class="section active">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <div>
+                            <h3>1,250</h3>
+                            <p>Total Penduduk</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-home"></i></div>
+                        <div>
+                            <h3>320</h3>
+                            <p>Kepala Keluarga</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                        <div>
+                            <h3>15</h3>
+                            <p>Surat Masuk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profil" class="section">
+                <div class="table-container">
+                    <h3>Identitas Desa</h3>
+                    <p>Halaman ini berisi informasi profil desa, visi misi, dan struktur organisasi.</p>
+                    <br>
+                    <form>
+                        <div class="input-group">
+                            <label>Nama Desa</label>
+                            <input type="text" value="Desa Maju Jaya" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Kepala Desa</label>
+                            <input type="text" value="Bapak Sutrisno" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Alamat Kantor</label>
+                            <input type="text" value="Jl. Raya Desa No. 1" readonly>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="penduduk" class="section">
+                <div class="table-container">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <h3>Daftar Penduduk</h3>
+                        <button class="btn-login" style="width:auto; padding: 8px 15px; font-size:14px;">+ Tambah Data</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>NIK</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Pekerjaan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>32010123001</td>
+                                <td>Ahmad Fulan</td>
+                                <td>Laki-laki</td>
+                                <td>Petani</td>
+                                <td><i class="fas fa-edit" style="color:orange; cursor:pointer;"></i></td>
+                            </tr>
+                            <tr>
+                                <td>32010123002</td>
+                                <td>Siti Aminah</td>
+                                <td>Perempuan</td>
+                                <td>Guru</td>
+                                <td><i class="fas fa-edit" style="color:orange; cursor:pointer;"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="pengaturan" class="section">
+                <div class="table-container">
+                    <h3>Pengaturan Akun</h3>
+                    <p>Ubah password dan pengaturan aplikasi disini.</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
-        // Cek apakah user sudah login
+        // Cek Sesi Login
         if (sessionStorage.getItem('isLoggedIn') !== 'true') {
             window.location.href = 'index.html';
         }
-
         document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('namaUser');
 
+        // Fungsi Ganti Menu (Tanpa Reload)
+        function showMenu(menuId, element) {
+            // 1. Sembunyikan semua section
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // 2. Tampilkan section yang dipilih
+            document.getElementById(menuId).classList.add('active');
+
+            // 3. Update judul halaman
+            const titleMap = {
+                'beranda': 'Beranda',
+                'profil': 'Profil Desa',
+                'penduduk': 'Data Kependudukan',
+                'pengaturan': 'Pengaturan Akun'
+            };
+            document.getElementById('page-title').innerText = titleMap[menuId];
+
+            // 4. Atur status aktif di sidebar
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+
         function logout() {
-            sessionStorage.clear();
-            window.location.href = 'index.html';
+            if(confirm("Yakin ingin keluar?")) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
         }
     </script>
 </body>
